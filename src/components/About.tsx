@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Download, GraduationCap, Code, Github, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useResume } from '../ResumeContext';
+import profileImage from '../assets/images/profile.jpeg';
 
 interface GithubStats {
   public_repos: number;
@@ -109,7 +110,7 @@ const About: React.FC = () => {
               <div className="relative">
                 <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan opacity-20 blur-xl animate-pulse"></div>
                 <div className="w-72 h-72 md:w-96 md:h-96 rounded-full p-1 bg-gradient-to-br from-gray-200 to-white dark:from-gray-800 dark:to-black shadow-2xl overflow-hidden relative z-10">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Euller Duarte" className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-700" />
+                  <img src={profileImage} alt="Euller Duarte" className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-700" />
                   
                   {/* Adicionado o Gráfico de Commits Animado aqui */}
                   <CommitGraph />
