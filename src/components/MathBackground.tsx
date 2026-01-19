@@ -50,7 +50,7 @@ const MathBackground: React.FC = () => {
       {formulas.map((item, index) => (
         <div
           key={index}
-          className={`absolute font-serif font-medium italic transition-all duration-1000 ease-in-out ${item.className} ${
+          className={`absolute font-serif font-medium italic transition-all duration-1000 ease-in-out transform-gpu will-change-transform ${item.className} ${
             item.isSignature 
               ? 'text-accent-blue/20 dark:text-accent-blue/20 mix-blend-normal' // Signature styling
               : 'text-gray-900 dark:text-white mix-blend-overlay' // Standard styling

@@ -52,8 +52,8 @@ const Hero: React.FC = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-blue/5 dark:bg-accent-blue/10 rounded-full blur-[128px] pointer-events-none mix-blend-multiply dark:mix-blend-normal" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-purple/5 dark:bg-accent-purple/10 rounded-full blur-[128px] pointer-events-none mix-blend-multiply dark:mix-blend-normal" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-blue/5 dark:bg-accent-blue/10 rounded-full blur-3xl md:blur-[128px] pointer-events-none mix-blend-multiply dark:mix-blend-normal transform-gpu will-change-transform" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-purple/5 dark:bg-accent-purple/10 rounded-full blur-3xl md:blur-[128px] pointer-events-none mix-blend-multiply dark:mix-blend-normal transform-gpu will-change-transform" />
 
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
