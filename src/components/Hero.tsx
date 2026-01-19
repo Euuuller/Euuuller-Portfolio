@@ -6,10 +6,13 @@ const Hero: React.FC = () => {
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [delta, setDelta] = useState(150);
+  const [delta, setDelta] = useState(80);
+  const [isPaused, setIsPaused] = useState(false);
   
   const toRotate = ["Analista de Dados", "Data Analyst"];
-  const period = 2000;
+  const typingSpeed = 80; // Velocidade de digitação (mais rápido)
+  const deletingSpeed = 50; // Velocidade de apagar (mais rápido)
+  const pauseDuration = 1200; // Pausa após completar o texto (reduzido)
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -21,15 +24,26 @@ const Hero: React.FC = () => {
 
       setText(updatedText);
 
-      if (isDeleting) setDelta(prev => prev / 1.5);
-
+      // Ajusta a velocidade baseado no estado
       if (!isDeleting && updatedText === fullText) {
+        // Texto completo - pausa antes de deletar
+        setIsPaused(true);
         setIsDeleting(true);
-        setDelta(period);
+        setDelta(pauseDuration);
       } else if (isDeleting && updatedText === '') {
+        // Texto deletado completamente - vai para próxima palavra
+        setIsPaused(false);
         setIsDeleting(false);
         setLoopNum(loopNum + 1);
-        setDelta(150);
+        setDelta(typingSpeed);
+      } else if (isDeleting) {
+        // Deletando
+        setIsPaused(false);
+        setDelta(deletingSpeed);
+      } else {
+        // Digitando
+        setIsPaused(false);
+        setDelta(typingSpeed);
       }
     }, delta);
 
@@ -53,9 +67,9 @@ const Hero: React.FC = () => {
           </h1>
           
           <div className="h-16 md:h-20 mb-6 flex items-center justify-center">
-            <h2 className="text-4xl md:text-6xl font-display font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent animate-pulse">
+            <h2 className="text-4xl md:text-6xl font-display font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
               {text}
-              <span className="text-gray-400 font-light">|</span>
+              <span className={`text-gray-400 font-light ${isPaused ? 'animate-pulse' : ''}`}>|</span>
             </h2>
           </div>
 
