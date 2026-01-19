@@ -42,70 +42,6 @@
         },
       };
     </script>
-    <style>
-      /* Base transitions for theme switching */
-      body {
-        transition:
-          background-color 0.3s ease,
-          color 0.3s ease;
-      }
-
-      /* Hide Scrollbar totally */
-      html {
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-      }
-
-      body::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-      }
-
-      /* Hide Default Cursor only on devices that have a mouse */
-      @media (hover: hover) and (pointer: fine) {
-        body,
-        a,
-        button,
-        [role="button"],
-        input,
-        textarea {
-          cursor: none !important;
-        }
-      }
-
-      /* Light Mode Glass */
-      .glass-card-light {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        box-shadow:
-          0 4px 6px -1px rgba(0, 0, 0, 0.05),
-          0 2px 4px -1px rgba(0, 0, 0, 0.03);
-      }
-
-      /* Dark Mode Glass - Pure Black adaption */
-      .dark .glass-card {
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: none;
-      }
-
-      .glass-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-      }
-
-      .text-gradient {
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4);
-      }
-    </style>
     <script type="importmap">
       {
         "imports": {
@@ -117,7 +53,6 @@
         }
       }
     </script>
-    <link rel="stylesheet" href="/index.css" />
   </head>
   <body>
     <div id="root"></div>
