@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import excelIcon from '../assets/icons/excel.svg';
 import seabornIcon from '../assets/icons/seaborn.svg';
+import latexIcon from '../assets/icons/latex.svg';
+import uvIcon from '../assets/icons/uv.svg';
 
 type Category = 'languages_db' | 'visualization' | 'ml_stats' | 'software_eng';
 
@@ -132,6 +134,12 @@ const skills: Skill[] = [
     description: 'Framework open-source para deep learning e redes neurais.',
     category: 'ml_stats'
   },
+  {
+    name: 'LaTeX',
+    icon: latexIcon,
+    description: 'Redação técnica e formatação de documentos científicos.',
+    category: 'ml_stats'
+  },
 
   // Engenharia de Software
   {
@@ -156,6 +164,12 @@ const skills: Skill[] = [
     name: 'Docker',
     icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
     description: 'Containerização para padronização de ambientes.',
+    category: 'software_eng'
+  },
+  {
+    name: 'UV',
+    icon: uvIcon,
+    description: 'Gerenciador de projetos e pacotes Python de alta performance.',
     category: 'software_eng'
   }
 ];
