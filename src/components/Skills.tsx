@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import excelIcon from '../assets/icons/excel.svg';
+import seabornIcon from '../assets/icons/seaborn.svg';
 
 type Category = 'languages_db' | 'visualization' | 'ml_stats' | 'software_eng';
 
@@ -76,7 +78,7 @@ const skills: Skill[] = [
   },
   {
     name: 'Excel',
-    icon: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019–present%29.svg',
+    icon: excelIcon,
     description: 'Análise exploratória, tabelas dinâmicas e automação.',
     category: 'visualization'
   },
@@ -94,7 +96,7 @@ const skills: Skill[] = [
   },
   {
     name: 'Seaborn',
-    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/seaborn/seaborn-original.svg',
+    icon: seabornIcon,
     description: 'Visualização de dados estatísticos atraentes e informativos.',
     category: 'visualization'
   },
