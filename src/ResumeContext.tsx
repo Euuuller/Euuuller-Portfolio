@@ -14,8 +14,10 @@ export const ResumeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const openResume = () => setIsResumeOpen(true);
   const closeResume = () => setIsResumeOpen(false);
 
+  const contextValue = React.useMemo(() => ({ isResumeOpen, openResume, closeResume }), [isResumeOpen]);
+
   return (
-    <ResumeContext.Provider value={{ isResumeOpen, openResume, closeResume }}>
+    <ResumeContext.Provider value={contextValue}>
       {children}
     </ResumeContext.Provider>
   );
