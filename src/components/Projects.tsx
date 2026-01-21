@@ -3,6 +3,7 @@ import { Project } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, BarChart, TrendingUp, ShieldCheck, MessageSquare, Truck, ExternalLink, Maximize2 } from 'lucide-react';
 import ProjectModal from './ProjectModal';
+import LazyImage from './LazyImage';
 
 const projects: Project[] = [
   {
@@ -141,7 +142,7 @@ const Projects: React.FC = () => {
               onClick={() => openProjectDetails(project)}
             >
               <div className="relative h-56 overflow-hidden flex-shrink-0">
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <LazyImage src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 
                 {/* Overlay with Buttons */}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 backdrop-blur-sm">

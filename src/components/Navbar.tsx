@@ -4,6 +4,7 @@ import { NavItem } from '../types';
 import { useTheme } from '../ThemeContext';
 import { useResume } from '../ResumeContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import { throttle } from '../utils/performance';
 
 const navItems: NavItem[] = [
   { label: 'Início', href: '#hero' },
@@ -20,8 +21,11 @@ const Navbar: React.FC = () => {
   const { openResume } = useResume();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = throttle(() => {
+      setIsScrolled(window.scrollY > 50);
+    }, 100);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

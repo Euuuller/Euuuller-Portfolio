@@ -9,10 +9,10 @@ const Hero: React.FC = () => {
   const [delta, setDelta] = useState(80);
   const [isPaused, setIsPaused] = useState(false);
   
-  const toRotate = ["Analista de Dados", "Data Analyst"];
-  const typingSpeed = 80; // Velocidade de digitação (mais rápido)
-  const deletingSpeed = 50; // Velocidade de apagar (mais rápido)
-  const pauseDuration = 1200; // Pausa após completar o texto (reduzido)
+  const toRotate = React.useMemo(() => ["Analista de Dados", "Data Analyst"], []);
+  const typingSpeed = 80;
+  const deletingSpeed = 50;
+  const pauseDuration = 1200;
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -22,42 +22,40 @@ const Hero: React.FC = () => {
         ? fullText.substring(0, text.length - 1) 
         : fullText.substring(0, text.length + 1);
 
+      if (updatedText === text) return; // Avoid setting state if text hasn't changed
+
       setText(updatedText);
 
-      // Ajusta a velocidade baseado no estado
       if (!isDeleting && updatedText === fullText) {
-        // Texto completo - pausa antes de deletar
         setIsPaused(true);
         setIsDeleting(true);
         setDelta(pauseDuration);
       } else if (isDeleting && updatedText === '') {
-        // Texto deletado completamente - vai para próxima palavra
         setIsPaused(false);
         setIsDeleting(false);
         setLoopNum(loopNum + 1);
         setDelta(typingSpeed);
       } else if (isDeleting) {
-        // Deletando
         setIsPaused(false);
         setDelta(deletingSpeed);
       } else {
-        // Digitando
         setIsPaused(false);
         setDelta(typingSpeed);
       }
     }, delta);
 
     return () => clearInterval(ticker);
-  }, [text, delta, isDeleting, loopNum]);
+  }, [text, delta, isDeleting, loopNum, toRotate]);
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-blue/5 dark:bg-accent-blue/10 rounded-full blur-3xl md:blur-[128px] pointer-events-none mix-blend-multiply dark:mix-blend-normal transform-gpu will-change-transform" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-purple/5 dark:bg-accent-purple/10 rounded-full blur-3xl md:blur-[128px] pointer-events-none mix-blend-multiply dark:mix-blend-normal transform-gpu will-change-transform" />
+      {/* Optimized Glow Effects - Reduced blur radius for mobile and added will-change */}
+      <div className="absolute top-0 left-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent-blue/5 dark:bg-accent-blue/10 rounded-full blur-[64px] md:blur-[128px] pointer-events-none mix-blend-screen dark:mix-blend-normal transform-gpu will-change-transform opacity-60" />
+      <div className="absolute bottom-0 right-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent-purple/5 dark:bg-accent-purple/10 rounded-full blur-[64px] md:blur-[128px] pointer-events-none mix-blend-screen dark:mix-blend-normal transform-gpu will-change-transform opacity-60" />
 
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <span className="inline-block py-1 px-3 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue text-sm font-medium mb-6">
+          <span className="inline-block py-1 px-3 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue text-sm font-medium mb-6 backdrop-blur-sm">
             Disponível para novos projetos
           </span>
           
@@ -67,7 +65,7 @@ const Hero: React.FC = () => {
           </h1>
           
           <div className="h-16 md:h-20 mb-6 flex items-center justify-center">
-            <h2 className="text-4xl md:text-6xl font-display font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-6xl font-display font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent transform-gpu">
               {text}
               <span className={`text-gray-400 font-light ${isPaused ? 'animate-pulse' : ''}`}>|</span>
             </h2>
@@ -80,11 +78,11 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            <a href="#projetos" className="px-8 py-3 bg-accent-blue hover:bg-blue-600 text-white rounded-lg font-medium transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2">
+            <a href="#projetos" className="px-8 py-3 bg-accent-blue hover:bg-blue-600 text-white rounded-lg font-medium transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2 active:scale-95">
               Ver Projetos
               <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="#contato" className="px-8 py-3 bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 text-gray-900 dark:text-white border border-gray-200 dark:border-white/10 rounded-lg font-medium transition-all backdrop-blur-sm">
+            <a href="#contato" className="px-8 py-3 bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 text-gray-900 dark:text-white border border-gray-200 dark:border-white/10 rounded-lg font-medium transition-all backdrop-blur-sm active:scale-95">
               Entrar em Contato
             </a>
           </div>
