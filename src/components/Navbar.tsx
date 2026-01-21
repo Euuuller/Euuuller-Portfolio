@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Terminal, Sun, Moon, FileText, Github, Linkedin, Mail, BookOpen } from 'lucide-react';
+import { Menu, X, Sun, Moon, FileText, Github, Linkedin, Mail, BookOpen } from 'lucide-react';
 import { NavItem } from '../types';
 import { useTheme } from '../ThemeContext';
 import { useResume } from '../ResumeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { throttle } from '../utils/performance';
+import Logo from './Logo';
 
 const navItems: NavItem[] = [
   { label: 'Início', href: '#hero' },
