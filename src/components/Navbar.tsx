@@ -48,10 +48,10 @@ const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <a href="#hero" className="flex items-center gap-2 group">
             <div className="p-2 rounded-lg bg-accent-blue/10 group-hover:bg-accent-blue/20 transition-colors">
-              <Terminal className="w-6 h-6 text-accent-blue" />
+              <Logo className="w-8 h-8" />
             </div>
             <span className="font-display font-bold text-xl tracking-tight text-gray-900 dark:text-white">
-              Euller<span className="text-accent-blue">.DS</span>
+              Euller<span className="text-accent-blue">.AI</span>
             </span>
           </a>
 
