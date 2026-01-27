@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Github, ExternalLink, Target, Lightbulb, TrendingUp, Calendar, ArrowRight } from 'lucide-react';
-import { Project } from '../types';
+import { Project } from '../../types';
 
 interface ProjectModalProps {
   project: Project | null;

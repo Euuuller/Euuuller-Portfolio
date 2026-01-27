@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Project } from '../types';
+import { Project } from '../../types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, BarChart, TrendingUp, ShieldCheck, MessageSquare, Truck, ExternalLink, Maximize2 } from 'lucide-react';
-import ProjectModal from './ProjectModal';
-import LazyImage from './LazyImage';
+import ProjectModal from '../common/ProjectModal';
+import LazyImage from '../common/LazyImage';
 
 const projects: Project[] = [
   {
@@ -173,6 +173,7 @@ const Projects: React.FC = () => {
                     <a 
                       href={project.demoUrl} 
                       target="_blank" 
+                      rel="noopener noreferrer"
                       title="Ver Demo Ao Vivo"
                       onClick={(e) => e.stopPropagation()}
                       className="p-3 bg-white text-black rounded-full hover:bg-accent-purple hover:text-white transition-colors transform hover:scale-110 duration-200"
@@ -229,4 +230,4 @@ const Projects: React.FC = () => {
     </section>
   );
 };
-export default Projects;
+export default React.memo(Projects);

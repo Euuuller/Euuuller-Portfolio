@@ -23,38 +23,34 @@ const CustomCursor: React.FC = () => {
     const handleMouseDown = () => setIsHovered(true);
     const handleMouseUp = () => setIsHovered(false);
 
-    const handleLinkHover = () => setIsHovered(true);
-    const handleLinkLeave = () => setIsHovered(false);
+    // Event Delegation for Hover Effects
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Check if the target or its closest clickable ancestor is interactive
+      if (target.matches('a, button, input, textarea, [role="button"]') || target.closest('a, button, input, textarea, [role="button"]')) {
+        setIsHovered(true);
+      }
+    };
 
-    window.addEventListener('mousemove', moveCursor);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
+    const handleMouseOut = (e: MouseEvent) => {
+       const target = e.target as HTMLElement;
+       if (target.matches('a, button, input, textarea, [role="button"]') || target.closest('a, button, input, textarea, [role="button"]')) {
+        setIsHovered(false);
+      }
+    };
 
-    // Add listeners to all interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, input, textarea, [role="button"]');
-    interactiveElements.forEach((el) => {
-      el.addEventListener('mouseenter', handleLinkHover);
-      el.addEventListener('mouseleave', handleLinkLeave);
-    });
-
-    // Cleanup and re-add listeners periodically for dynamic content
-    const observer = new MutationObserver(() => {
-      const newElements = document.querySelectorAll('a, button, input, textarea, [role="button"]');
-      newElements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleLinkHover); // Avoid duplicates
-        el.removeEventListener('mouseleave', handleLinkLeave);
-        el.addEventListener('mouseenter', handleLinkHover);
-        el.addEventListener('mouseleave', handleLinkLeave);
-      });
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('mousemove', moveCursor, { passive: true });
+    window.addEventListener('mousedown', handleMouseDown, { passive: true });
+    window.addEventListener('mouseup', handleMouseUp, { passive: true });
+    document.addEventListener('mouseover', handleMouseOver, { passive: true });
+    document.addEventListener('mouseout', handleMouseOut, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
-      observer.disconnect();
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
     };
   }, [cursorX, cursorY, isVisible]);
 
@@ -99,4 +95,4 @@ const CustomCursor: React.FC = () => {
   );
 };
 
-export default CustomCursor;
+export default React.memo(CustomCursor);

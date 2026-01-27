@@ -25,6 +25,17 @@ Este projeto não é apenas um site; é um **hub centralizador de competências*
 - **Integração Contínua**: Deploy automatizado via GitHub Actions.
 - **DX (Developer Experience)**: Código limpo, tipado com TypeScript e organizado.
 
+### ⚡ Otimizações de Performance (2025 Refactor)
+
+Este projeto passou por uma refatoração profunda focada em performance e boas práticas:
+
+- **Code Splitting Agressivo**: Carregamento sob demanda de componentes pesados e rotas.
+- **Memoization**: Uso estratégico de `React.memo`, `useMemo` e `useCallback` para evitar re-renderizações desnecessárias.
+- **Otimização de Assets**: Imagens convertidas para WebP, lazy loading implementado com Intersection Observer.
+- **Virtualização**: Renderização eficiente de listas longas.
+- **Animações Otimizadas**: Uso de propriedades que não causam reflow/repaint (`transform`, `opacity`) e `will-change`.
+- **Build Otimizado**: Minificação com ESBuild, compressão Gzip/Brotli e Tree Shaking.
+
 ---
 
 ## 🛠️ Tech Stack & Ferramentas

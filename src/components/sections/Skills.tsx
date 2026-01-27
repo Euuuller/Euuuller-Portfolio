@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import excelIcon from '../assets/icons/excel.svg';
-import seabornIcon from '../assets/icons/seaborn.svg';
-import latexIcon from '../assets/icons/latex.svg';
-import uvIcon from '../assets/icons/uv.svg';
+import excelIcon from '../../assets/icons/excel.svg';
+import seabornIcon from '../../assets/icons/seaborn.svg';
+import latexIcon from '../../assets/icons/latex.svg';
+import uvIcon from '../../assets/icons/uv.svg';
 
 type Category = 'languages_db' | 'visualization' | 'ml_stats' | 'software_eng';
 
@@ -267,4 +267,4 @@ const Skills: React.FC = () => {
   );
 };
 
-export default Skills;
+export default React.memo(Skills);

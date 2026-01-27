@@ -44,7 +44,7 @@ const formulas: Formula[] = [
   { text: "∇×H", suffix: " = J + ∂D/∂t", className: "text-sm md:text-base bottom-[40%] left-[85%] rotate-[5deg] opacity-[0.06]", label: "Ampère-Maxwell" },
 ];
 
-const MathBackground: React.FC = () => {
+const MathBackground: React.FC = React.memo(() => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
       {formulas.map((item, index) => (
@@ -66,6 +66,6 @@ const MathBackground: React.FC = () => {
       ))}
     </div>
   );
-};
+});
 
 export default MathBackground;

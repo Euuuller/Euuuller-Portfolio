@@ -1,19 +1,19 @@
 import React, { Suspense, lazy } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Footer from './components/Footer';
-import ResumeModal from './components/ResumeModal';
-import CustomCursor from './components/CustomCursor';
-import MathBackground from './components/MathBackground';
-import { ThemeProvider } from './ThemeContext';
-import { ResumeProvider } from './ResumeContext';
-import Loader from './components/Loader';
+import Navbar from './components/sections/Navbar';
+import Hero from './components/sections/Hero';
+import Footer from './components/sections/Footer';
+import ResumeModal from './components/common/ResumeModal';
+import CustomCursor from './components/common/CustomCursor';
+import MathBackground from './components/sections/MathBackground';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { ResumeProvider } from './contexts/ResumeContext';
+import Loader from './components/common/Loader';
 
 // Lazy load heavy components
-const About = lazy(() => import('./components/About'));
-const Skills = lazy(() => import('./components/Skills'));
-const Projects = lazy(() => import('./components/Projects'));
-const Contact = lazy(() => import('./components/Contact'));
+const About = lazy(() => import('./components/sections/About'));
+const Skills = lazy(() => import('./components/sections/Skills'));
+const Projects = lazy(() => import('./components/sections/Projects'));
+const Contact = lazy(() => import('./components/sections/Contact'));
 
 const AppContent: React.FC = () => {
   return (

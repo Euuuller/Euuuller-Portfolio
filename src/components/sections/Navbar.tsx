@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Terminal, Sun, Moon, FileText, Github, Linkedin, Mail, BookOpen } from 'lucide-react';
-import { NavItem } from '../types';
-import { useTheme } from '../ThemeContext';
-import { useResume } from '../ResumeContext';
+import { NavItem } from '../../types';
+import { useTheme } from '../../contexts/ThemeContext';
+import { useResume } from '../../contexts/ResumeContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { throttle } from '../utils/performance';
+import { throttle } from '../../utils/performance';
 
 const navItems: NavItem[] = [
   { label: 'Início', href: '#hero' },
@@ -156,4 +156,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default React.memo(Navbar);

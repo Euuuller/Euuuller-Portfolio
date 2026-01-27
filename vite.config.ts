@@ -40,16 +40,21 @@ export default defineConfig(({ mode }) => {
         }
       },
       build: {
+        target: 'esnext',
+        minify: 'esbuild',
+        cssMinify: true,
         rollupOptions: {
           output: {
             manualChunks: {
               vendor: ['react', 'react-dom'],
               animations: ['framer-motion'],
-              icons: ['lucide-react']
+              icons: ['lucide-react'],
+              utils: [path.resolve(__dirname, './src/utils/performance.ts')]
             }
           }
         },
-        chunkSizeWarningLimit: 1000
+        chunkSizeWarningLimit: 1000,
+        reportCompressedSize: false
       }
     };
 });

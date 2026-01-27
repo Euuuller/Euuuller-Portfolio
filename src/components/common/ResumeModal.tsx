@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { X, Printer, Download, Mail, Linkedin, Github, Phone, MapPin } from 'lucide-react';
-import { useResume } from '../ResumeContext';
+import { useResume } from '../../contexts/ResumeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ResumeModal: React.FC = () => {
@@ -239,4 +239,4 @@ const ResumeModal: React.FC = () => {
   );
 };
 
-export default ResumeModal;
+export default React.memo(ResumeModal);

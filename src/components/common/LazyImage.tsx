@@ -67,4 +67,4 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, alt, className, placeholder,
   );
 };
 
-export default LazyImage;
+export default React.memo(LazyImage);

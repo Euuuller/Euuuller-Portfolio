@@ -8,52 +8,24 @@
       name="description"
       content="Portfólio de Euller Duarte - Analista de Dados e Engenheiro Eletricista em formação."
     />
+    
+    <!-- Security Meta Tags -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://formsubmit.co;" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="/src/assets/images/profile.webp" as="image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['"Plus Jakarta Sans"', "sans-serif"],
-              display: ['"Outfit"', "sans-serif"],
-            },
-            colors: {
-              bg: {
-                primary: "#000000", // Pure Black
-                secondary: "#0A0A0A", // Very dark grey for cards
-              },
-              accent: {
-                blue: "#3B82F6",
-                cyan: "#06B6D4",
-                purple: "#8B5CF6",
-              },
-            },
-            backgroundImage: {
-              "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-            },
-          },
-        },
-      };
-    </script>
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "https://esm.sh/react@^19.2.3",
-          "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-          "react/": "https://esm.sh/react@^19.2.3/",
-          "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-          "framer-motion": "https://esm.sh/framer-motion@^12.27.0"
-        }
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,51 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
+import TypingEffect from '../common/TypingEffect';
 
 const Hero: React.FC = () => {
-  const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [delta, setDelta] = useState(80);
-  const [isPaused, setIsPaused] = useState(false);
-  
   const toRotate = React.useMemo(() => ["Analista de Dados", "Data Analyst"], []);
-  const typingSpeed = 80;
-  const deletingSpeed = 50;
-  const pauseDuration = 1200;
-
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      let i = loopNum % toRotate.length;
-      let fullText = toRotate[i];
-      let updatedText = isDeleting 
-        ? fullText.substring(0, text.length - 1) 
-        : fullText.substring(0, text.length + 1);
-
-      if (updatedText === text) return; // Avoid setting state if text hasn't changed
-
-      setText(updatedText);
-
-      if (!isDeleting && updatedText === fullText) {
-        setIsPaused(true);
-        setIsDeleting(true);
-        setDelta(pauseDuration);
-      } else if (isDeleting && updatedText === '') {
-        setIsPaused(false);
-        setIsDeleting(false);
-        setLoopNum(loopNum + 1);
-        setDelta(typingSpeed);
-      } else if (isDeleting) {
-        setIsPaused(false);
-        setDelta(deletingSpeed);
-      } else {
-        setIsPaused(false);
-        setDelta(typingSpeed);
-      }
-    }, delta);
-
-    return () => clearInterval(ticker);
-  }, [text, delta, isDeleting, loopNum, toRotate]);
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
@@ -65,10 +24,7 @@ const Hero: React.FC = () => {
           </h1>
           
           <div className="h-16 md:h-20 mb-6 flex items-center justify-center">
-            <h2 className="text-4xl md:text-6xl font-display font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent transform-gpu">
-              {text}
-              <span className={`text-gray-400 font-light ${isPaused ? 'animate-pulse' : ''}`}>|</span>
-            </h2>
+            <TypingEffect toRotate={toRotate} />
           </div>
 
           <div className="mb-10 max-w-2xl mx-auto">
@@ -96,4 +52,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default React.memo(Hero);

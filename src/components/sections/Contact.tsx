@@ -42,6 +42,7 @@ const Contact: React.FC = () => {
               <a 
                 href="https://linkedin.com/in/euuuller"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 glass-card rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors group border border-gray-200 dark:border-white/5"
               >
                 <div className="w-10 h-10 flex-shrink-0 rounded-full bg-[#0077b5]/10 flex items-center justify-center text-[#0077b5] group-hover:scale-110 transition-transform">
@@ -57,6 +58,7 @@ const Contact: React.FC = () => {
               <a 
                 href="https://github.com/Euuuller"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 glass-card rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors group border border-gray-200 dark:border-white/5"
               >
                 <div className="w-10 h-10 flex-shrink-0 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white group-hover:scale-110 transition-transform">
@@ -72,6 +74,7 @@ const Contact: React.FC = () => {
               <a 
                 href="https://medium.com/@euller.santos.duarte"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 glass-card rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors group border border-gray-200 dark:border-white/5"
               >
                 <div className="w-10 h-10 flex-shrink-0 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
@@ -156,4 +159,4 @@ const Contact: React.FC = () => {
   );
 };
 
-export default Contact;
+export default React.memo(Contact);

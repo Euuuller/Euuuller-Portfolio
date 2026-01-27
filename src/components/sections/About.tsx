@@ -1,54 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Download, GraduationCap, Code, Github, Target } from 'lucide-react';
+import { Download, GraduationCap, Code, Target, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useResume } from '../ResumeContext';
-import profileImage from '../assets/images/profile.webp'; // Updated to WebP
-import LazyImage from './LazyImage';
+import { useResume } from '../../contexts/ResumeContext';
+import profileImage from '../../assets/images/profile.webp'; // Updated to WebP
+import LazyImage from '../common/LazyImage';
+import CommitGraph from './CommitGraph';
 
 interface GithubStats {
   public_repos: number;
 }
-
-// Componente visual para simular o gráfico de contribuição (Estética Data Viz)
-const CommitGraph: React.FC = () => {
-  // Gera níveis de atividade aleatórios para simular um histórico
-  const weeks = 14;
-  const days = 7;
-  
-  return (
-    <div className="absolute -bottom-6 -left-6 md:-bottom-8 md:-left-12 z-20 bg-white/90 dark:bg-[#0A0A0A]/90 backdrop-blur-md p-3 rounded-xl border border-gray-200 dark:border-white/10 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Activity Log</span>
-        <Github className="w-3 h-3 text-gray-400" />
-      </div>
-      <div className="flex gap-[2px]">
-        {Array.from({ length: weeks }).map((_, w) => (
-          <div key={w} className="flex flex-col gap-[2px]">
-            {Array.from({ length: days }).map((_, d) => {
-              // Simulação de "intensidade" do commit
-              const intensity = Math.random();
-              let colorClass = 'bg-gray-200 dark:bg-white/5'; // Empty
-              
-              if (intensity > 0.85) colorClass = 'bg-accent-blue'; // High
-              else if (intensity > 0.6) colorClass = 'bg-accent-purple'; // Medium
-              else if (intensity > 0.4) colorClass = 'bg-accent-cyan/60'; // Low
-              
-              return (
-                <motion.div
-                  key={`${w}-${d}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: (w * 0.1) + (d * 0.05) }}
-                  className={`w-2 h-2 rounded-[1px] ${colorClass}`}
-                />
-              );
-            })}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const About: React.FC = () => {
   const { openResume } = useResume();
@@ -76,7 +36,7 @@ const About: React.FC = () => {
     fetchGithubData();
   }, []);
 
-  const cards = [
+  const cards = React.useMemo(() => [
     { 
       icon: <Code className="w-6 h-6 text-accent-blue" />, 
       title: "Repositórios", 
@@ -96,7 +56,7 @@ const About: React.FC = () => {
       subtitle: "Eng. Elétrica (IFMA)",
       isDynamic: false
     }
-  ];
+  ], [loading, stats.public_repos]);
 
   return (
     <section id="sobre" className="py-24 relative overflow-hidden">
@@ -140,7 +100,7 @@ const About: React.FC = () => {
                   <Download className="w-5 h-5" />
                   Baixar Currículo
                 </button>
-                <a href="https://github.com/Euuuller" target="_blank" className="px-8 py-3 border border-gray-300 dark:border-white/20 text-gray-900 dark:text-white rounded-full font-medium hover:bg-gray-100 dark:hover:bg-white/10 transition-all flex items-center gap-2">
+                <a href="https://github.com/Euuuller" target="_blank" rel="noopener noreferrer" className="px-8 py-3 border border-gray-300 dark:border-white/20 text-gray-900 dark:text-white rounded-full font-medium hover:bg-gray-100 dark:hover:bg-white/10 transition-all flex items-center gap-2">
                   <Github className="w-5 h-5" />
                   Ver GitHub
                 </a>
@@ -152,4 +112,4 @@ const About: React.FC = () => {
     </section>
   );
 };
-export default About;
+export default React.memo(About);
