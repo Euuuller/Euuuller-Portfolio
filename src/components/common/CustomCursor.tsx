@@ -14,10 +14,17 @@ const CustomCursor: React.FC = () => {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    let rafId: number | null = null;
+    
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+      if (rafId) return; // Throttle to one update per frame
+      
+      rafId = requestAnimationFrame(() => {
+        cursorX.set(e.clientX);
+        cursorY.set(e.clientY);
+        if (!isVisible) setIsVisible(true);
+        rafId = null;
+      });
     };
 
     const handleMouseDown = () => setIsHovered(true);
@@ -46,6 +53,7 @@ const CustomCursor: React.FC = () => {
     document.addEventListener('mouseout', handleMouseOut, { passive: true });
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
@@ -62,7 +70,7 @@ const CustomCursor: React.FC = () => {
   }
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden mix-blend-difference">
+    <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
       {/* Main Dot */}
       <motion.div
         className="absolute w-2.5 h-2.5 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"

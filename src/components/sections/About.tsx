@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Download, GraduationCap, Code, Target, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useResume } from '../../contexts/ResumeContext';
-import profileImage from '../../assets/images/profile.webp'; // Updated to WebP
+import profileImage from '../../assets/images/profile.webp';
 import LazyImage from '../common/LazyImage';
-import CommitGraph from './CommitGraph';
 import { RevealOnScroll } from '../common/RevealOnScroll';
 
 interface GithubStats {
@@ -28,7 +27,8 @@ const About: React.FC = () => {
           });
         }
       } catch (error) {
-        console.error("Failed to fetch GitHub stats", error);
+        // Silent fallback - use default values if API fails
+        setStats({ public_repos: 0 });
       } finally {
         setLoading(false);
       }
@@ -75,9 +75,6 @@ const About: React.FC = () => {
                 <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan opacity-20 blur-[32px] animate-pulse"></div>
                 <div className="w-72 h-72 md:w-96 md:h-96 rounded-full p-1 bg-gradient-to-br from-gray-200 to-white dark:from-gray-800 dark:to-black shadow-2xl overflow-hidden relative z-10">
                   <LazyImage src={profileImage} alt="Euller Duarte" className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-700" />
-                  
-                  {/* Adicionado o Gráfico de Commits Animado aqui */}
-                  <CommitGraph />
                 </div>
               </div>
             </motion.div>

@@ -18,7 +18,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     document.documentElement.classList.add('dark');
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = React.useCallback(() => {
     setTheme((prev) => {
       const newTheme = prev === 'light' ? 'dark' : 'light';
       if (newTheme === 'dark') {
@@ -26,9 +26,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       } else {
         document.documentElement.classList.remove('dark');
       }
+      // Persist theme preference
+      localStorage.setItem('theme', newTheme);
       return newTheme;
     });
-  };
+  }, []);
 
   const contextValue = React.useMemo(() => ({ theme, toggleTheme }), [theme]);
 

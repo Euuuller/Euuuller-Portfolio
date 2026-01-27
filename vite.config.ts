@@ -40,21 +40,47 @@ export default defineConfig(({ mode }) => {
         }
       },
       build: {
-        target: 'esnext',
-        minify: 'esbuild',
+        target: 'es2015',
+        minify: 'terser',  // Switched from esbuild to terser for better compression
         cssMinify: true,
+        terserOptions: {
+          compress: {
+            drop_console: true,  // Remove all console.* in production
+            drop_debugger: true,
+            pure_funcs: ['console.log', 'console.info', 'console.debug']
+          },
+          mangle: {
+            safari10: true  // Fix Safari 10 issues
+          }
+        },
         rollupOptions: {
           output: {
-            manualChunks: {
-              vendor: ['react', 'react-dom'],
-              animations: ['framer-motion'],
-              icons: ['lucide-react'],
-              utils: [path.resolve(__dirname, './src/utils/performance.ts')]
+            manualChunks: (id) => {
+              // More granular code splitting
+              if (id.includes('node_modules')) {
+                if (id.includes('framer-motion')) {
+                  return 'framer';
+                }
+                if (id.includes('lucide-react')) {
+                  return 'icons';
+                }
+                if (id.includes('react') || id.includes('react-dom')) {
+                  return 'vendor';
+                }
+              }
+              // Split components by section
+              if (id.includes('/components/sections/')) {
+                return 'sections';
+              }
+              if (id.includes('/components/common/')) {
+                return 'common';
+              }
             }
           }
         },
-        chunkSizeWarningLimit: 1000,
-        reportCompressedSize: false
+        chunkSizeWarningLimit: 500,  // Warn if chunks exceed 500KB
+        reportCompressedSize: true,  // Show compressed sizes
+        sourcemap: false  // Disable source maps in production
       }
     };
 });
