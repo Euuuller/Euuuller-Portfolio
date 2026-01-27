@@ -9,8 +9,9 @@ const Hero: React.FC = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Optimized Glow Effects - Reduced blur radius for mobile and added will-change */}
-      <div className="absolute top-0 left-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent-blue/5 dark:bg-accent-blue/10 rounded-full blur-[64px] md:blur-[128px] pointer-events-none mix-blend-screen dark:mix-blend-normal transform-gpu will-change-transform opacity-60" />
-      <div className="absolute bottom-0 right-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent-purple/5 dark:bg-accent-purple/10 rounded-full blur-[64px] md:blur-[128px] pointer-events-none mix-blend-screen dark:mix-blend-normal transform-gpu will-change-transform opacity-60" />
+      {/* Optimized Glow Effects - Reduced blur radius for mobile and added will-change */}
+      <div className="absolute top-0 left-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent-blue/5 dark:bg-accent-blue/10 rounded-full blur-[40px] md:blur-[128px] pointer-events-none mix-blend-screen dark:mix-blend-normal transform-gpu will-change-transform opacity-60" />
+      <div className="absolute bottom-0 right-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent-purple/5 dark:bg-accent-purple/10 rounded-full blur-[40px] md:blur-[128px] pointer-events-none mix-blend-screen dark:mix-blend-normal transform-gpu will-change-transform opacity-60" />
 
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>

@@ -44,16 +44,34 @@ const formulas: Formula[] = [
   { text: "∇×H", suffix: " = J + ∂D/∂t", className: "text-sm md:text-base bottom-[40%] left-[85%] rotate-[5deg] opacity-[0.06]", label: "Ampère-Maxwell" },
 ];
 
-const MathBackground: React.FC = React.memo(() => {
+interface MathBackgroundProps {
+  isMobile: boolean;
+}
+
+const MathBackground: React.FC<MathBackgroundProps> = React.memo(({ isMobile }) => {
+  // Filter formulas for mobile to specific important ones (Signature + Large ones)
+  const visibleFormulas = React.useMemo(() => {
+    if (!isMobile) return formulas;
+    return formulas.filter(f => 
+      f.isSignature || // Euler
+      f.label === "Integral" || // Large Integral
+      f.label === "Somatório" || // Large Sum
+      f.label === "Laplace" || // Large Laplace
+      f.label === "Potência" // Large Power
+    );
+  }, [isMobile]);
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
-      {formulas.map((item, index) => (
+      {visibleFormulas.map((item, index) => (
         <div
           key={index}
-          className={`absolute font-serif font-medium italic transition-all duration-1000 ease-in-out transform-gpu will-change-transform ${item.className} ${
+          className={`absolute font-serif font-medium italic transition-all duration-1000 ease-in-out transform-gpu ${item.className} ${
             item.isSignature 
               ? 'text-accent-blue/20 dark:text-accent-blue/20 mix-blend-normal' // Signature styling
-              : 'text-gray-900 dark:text-white mix-blend-overlay' // Standard styling
+              : isMobile 
+                ? 'text-gray-900/5 dark:text-white/5' // Mobile: simple opacity, no blend mode
+                : 'text-gray-900 dark:text-white mix-blend-overlay will-change-transform' // Desktop: fancy blend
           }`}
         >
           <span className="relative whitespace-nowrap">

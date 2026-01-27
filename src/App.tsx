@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import Navbar from './components/sections/Navbar';
 import Hero from './components/sections/Hero';
 import Footer from './components/sections/Footer';
@@ -16,20 +16,38 @@ const Projects = lazy(() => import('./components/sections/Projects'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
 const AppContent: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="min-h-screen text-gray-900 dark:text-gray-100 font-sans selection:bg-accent-blue selection:text-white overflow-x-hidden transition-colors duration-300 relative">
-      <CustomCursor />
+      {/* Conditionally render CustomCursor only on non-mobile devices to improve performance */}
+      {!isMobile && <CustomCursor />}
       
       {/* Global Background Layers */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         {/* Base Solid Color: Pure White or Pure Black */}
         <div className="absolute inset-0 bg-white dark:bg-black transition-colors duration-300" />
         
-        {/* Math Formulas Layer (Engineering Background) */}
-        <MathBackground />
+        {/* Math Formulas Layer (Engineering Background) - Passes isMobile for optimization */}
+        <MathBackground isMobile={isMobile} />
         
-        {/* Noise Overlay */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light" />
+        {/* Noise Overlay - Optimized for Mobile (avoid mix-blend-soft-light on mobile) */}
+        <div 
+          className={`absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] ${
+            isMobile ? 'opacity-10' : 'opacity-20 mix-blend-soft-light'
+          }`} 
+        />
         
         {/* Grid Pattern - Adapts color for visibility */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>

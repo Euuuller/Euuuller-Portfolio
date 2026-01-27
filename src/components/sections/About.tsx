@@ -5,6 +5,7 @@ import { useResume } from '../../contexts/ResumeContext';
 import profileImage from '../../assets/images/profile.webp'; // Updated to WebP
 import LazyImage from '../common/LazyImage';
 import CommitGraph from './CommitGraph';
+import { RevealOnScroll } from '../common/RevealOnScroll';
 
 interface GithubStats {
   public_repos: number;
@@ -62,14 +63,16 @@ const About: React.FC = () => {
     <section id="sobre" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center">
-          <motion.h2 initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-4xl md:text-5xl font-display font-bold mb-16 text-gray-900 dark:text-white">
-            Sobre <span className="text-gradient">Mim</span>
-          </motion.h2>
+          <RevealOnScroll width="100%">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-16 text-gray-900 dark:text-white">
+              Sobre <span className="text-gradient">Mim</span>
+            </h2>
+          </RevealOnScroll>
 
           <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex justify-center md:justify-center lg:justify-start lg:pl-12 relative">
               <div className="relative">
-                <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan opacity-20 blur-xl animate-pulse"></div>
+                <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan opacity-20 blur-[32px] animate-pulse"></div>
                 <div className="w-72 h-72 md:w-96 md:h-96 rounded-full p-1 bg-gradient-to-br from-gray-200 to-white dark:from-gray-800 dark:to-black shadow-2xl overflow-hidden relative z-10">
                   <LazyImage src={profileImage} alt="Euller Duarte" className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-700" />
                   

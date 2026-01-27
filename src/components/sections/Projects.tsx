@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Github, BarChart, TrendingUp, ShieldCheck, MessageSquare, Truck, ExternalLink, Maximize2 } from 'lucide-react';
 import ProjectModal from '../common/ProjectModal';
 import LazyImage from '../common/LazyImage';
+import { RevealOnScroll } from '../common/RevealOnScroll';
 
 const projects: Project[] = [
   {
@@ -118,14 +119,14 @@ const Projects: React.FC = () => {
   return (
     <section id="projetos" className="py-32 max-w-7xl mx-auto px-6 relative">
       <div className="flex flex-col items-center justify-center text-center mb-16">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <RevealOnScroll width="100%">
            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gray-900 dark:text-white">
             Projetos <span className="text-gradient">Destaque</span>
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
             Cases reais de aplicação de dados transformando problemas complexos em soluções visuais e preditivas.
           </p>
-        </motion.div>
+        </RevealOnScroll>
       </div>
 
       <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
