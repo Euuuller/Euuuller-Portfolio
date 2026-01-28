@@ -5,6 +5,7 @@ import { useResume } from '../../contexts/ResumeContext';
 import profileImage from '../../assets/images/profile.webp';
 import LazyImage from '../common/LazyImage';
 import { RevealOnScroll } from '../common/RevealOnScroll';
+import AboutCard from '../common/AboutCard';
 
 interface GithubStats {
   public_repos: number;
@@ -42,20 +43,17 @@ const About: React.FC = () => {
       icon: <Code className="w-6 h-6 text-accent-blue" />, 
       title: "Repositórios", 
       subtitle: loading ? "Carregando..." : `${stats.public_repos}+ Projetos Públicos`,
-      isDynamic: true
     },
     { 
       // Trocado de Comunidade para Foco
       icon: <Target className="w-6 h-6 text-accent-purple" />, 
       title: "Foco Principal", 
       subtitle: "Engenharia de Dados & BI",
-      isDynamic: false
     },
     { 
       icon: <GraduationCap className="w-6 h-6 text-accent-cyan" />, 
       title: "Formação", 
       subtitle: "Eng. Elétrica (IFMA)",
-      isDynamic: false
     }
   ], [loading, stats.public_repos]);
 
@@ -82,11 +80,12 @@ const About: React.FC = () => {
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                 {cards.map((card, idx) => (
-                  <div key={idx} className="bg-white dark:bg-[#050505] border border-gray-200 dark:border-white/10 rounded-xl p-4 flex flex-col items-center text-center hover:border-accent-blue/50 transition-colors duration-300 group shadow-sm hover:shadow-md">
-                    <div className="mb-3 p-2 rounded-lg bg-gray-50 dark:bg-white/5 group-hover:bg-white/10 transition-colors duration-300">{card.icon}</div>
-                    <h3 className="text-gray-900 dark:text-white font-bold text-lg mb-1">{card.title}</h3>
-                    <p className="text-gray-500 dark:text-gray-400 text-xs font-medium">{card.subtitle}</p>
-                  </div>
+                  <AboutCard 
+                    key={idx}
+                    icon={card.icon}
+                    title={card.title}
+                    subtitle={card.subtitle}
+                  />
                 ))}
               </div>
 
